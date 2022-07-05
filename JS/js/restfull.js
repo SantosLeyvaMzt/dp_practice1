@@ -1,13 +1,3 @@
-/*var requestOptions = {
-  method: 'GET',
-  redirect: 'follow'
-};
-
-fetch("https://my-json-server.typicode.com/dp-danielortiz/dptest_jsonplaceholder/items?color=red", requestOptions)
-  .then(response => response.text())
-  .then(result => showResponse(result))
-  .catch(error => console.log('error', error));*/
-
 var settings = {
   "url"     : "https://my-json-server.typicode.com/dp-danielortiz/dptest_jsonplaceholder/items?color=red",
   "method"  : "GET",
@@ -19,15 +9,18 @@ $.ajax(settings).done(function (response) {
 });
 
   function showResponse(result){
-    //console.log(result);
-    $("#showTenis").text( result );
+    console.log(result);
+    let text = '{';
 
     $.each( result, function( index, value){
-      //console.log("index: " + value);
+      $("#showTenis").text(value);
       $.each( value, function(idx, val){
-        console.log(idx);
-        console.log(val);
+        text += idx + "=" + val + ",";
       });
-    
+      text = text.substr(0, text.length - 1);
+      text += "}{";
     });
+
+    text = text.substr(0, text.length - 1);
+    $("#showTenis").text(text);
   }
